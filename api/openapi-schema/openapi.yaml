@@ -1,0 +1,139 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: HelloApiSchema
+  description: Practice api schema
+  contact:
+    name: doriven
+    email: doriven@example.com
+    url: 'https://example.com'
+  license:
+    name: MIT
+servers:
+  - url: 'https://example.com'
+    description: example
+security:
+  - BasicAuth: []
+paths:
+  /users:
+    post:
+      description: Create a new user.
+      operationId: addUser
+      requestBody:
+        description: new user info
+        required: true
+        content:
+          'application:json':
+            schema:
+              $ref: '#/components/schemas/CreateUserInput'
+      responses:
+        '200':
+          description: hoge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserOutput'
+    put:
+      description: Update a user.
+      operationId: updateUser
+      requestBody:
+        required: true
+        content:
+          'application:json':
+            schema:
+              $ref: '#/components/schemas/UpdateUserInput'
+      responses:
+        '200':
+          description: hoge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserOutput'
+  /users/{id}:
+    get:
+      description: Get a user by id.
+      operationId: readUser
+      responses:
+        '200':
+          description: Success by usre
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserOutput'
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+            format: int64
+components:
+  schemas:
+    CreateUserInput:
+      type: object
+      required:
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: string
+    CreateUserOutput:
+      type: object
+      required:
+        - id
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        id:
+          type: integer
+          format: int64
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: string
+    UpdateUserInput:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          format: int64
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          type: string
+          format: date
+        address:
+          type: string
+    UpdateUserOutput:
+      $ref: '#/components/schemas/CreateUserOutput'
+    GetUserOutput:
+      $ref: '#/components/schemas/CreateUserOutput'

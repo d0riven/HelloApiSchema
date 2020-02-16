@@ -3,8 +3,10 @@
 以下のAPISchemaを手を動かしてみて調査・検証するためのレポジトリ
 
 * JSON + OpenAPI3(Swagger)
-  - 参考: https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3
-  - 参考: https://techblog.zozo.com/entry/openapi3/go
+  - 参考
+    * https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3
+    * https://techblog.zozo.com/entry/openapi3/go
+    * [公式Doc](https://github.com/OAI/OpenAPI-Specification/blob/3.0.2/versions/3.0.0.md#pathsObject)
 * gRPC + Protocol Buffers
   - 参考: https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3
 * GraphQL
