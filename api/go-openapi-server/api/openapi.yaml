@@ -1,0 +1,206 @@
+openapi: 3.0.2
+info:
+  contact:
+    email: doriven@example.com
+    name: doriven
+    url: https://example.com
+  description: Practice api schema
+  license:
+    name: MIT
+  title: HelloApiSchema
+  version: 1.0.0
+servers:
+- description: example
+  url: https://example.com
+security:
+- BasicAuth: []
+paths:
+  /users:
+    post:
+      description: Create a new user.
+      operationId: addUser
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: '#/components/schemas/CreateUserInput'
+        description: new user info
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserOutput'
+          description: hoge
+    put:
+      description: Update a user.
+      operationId: updateUser
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserInput'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserOutput'
+          description: hoge
+  /users/{id}:
+    get:
+      description: Get a user by id.
+      operationId: getUser
+      parameters:
+      - description: user id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserOutput'
+          description: Success by usre
+components:
+  schemas:
+    CreateUserInput:
+      properties:
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          type: string
+      required:
+      - address
+      - birthday
+      - email_address
+      - first_name
+      - last_name
+      type: object
+    CreateUserOutput:
+      example:
+        birthday: 2000-01-23
+        email_address: email_address
+        address: address
+        last_name: last_name
+        id: 0
+        first_name: first_name
+      properties:
+        id:
+          format: int64
+          type: integer
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          type: string
+      required:
+      - address
+      - birthday
+      - email_address
+      - first_name
+      - id
+      - last_name
+      type: object
+    UpdateUserInput:
+      properties:
+        id:
+          format: int64
+          type: integer
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          type: string
+      required:
+      - id
+      type: object
+    UpdateUserOutput:
+      example:
+        birthday: 2000-01-23
+        email_address: email_address
+        address: address
+        last_name: last_name
+        id: 0
+        first_name: first_name
+      properties:
+        id:
+          format: int64
+          type: integer
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          type: string
+      required:
+      - address
+      - birthday
+      - email_address
+      - first_name
+      - id
+      - last_name
+      type: object
+    GetUserOutput:
+      example:
+        birthday: 2000-01-23
+        email_address: email_address
+        address: address
+        last_name: last_name
+        id: 0
+        first_name: first_name
+      properties:
+        id:
+          format: int64
+          type: integer
+        email_address:
+          type: string
+        last_name:
+          type: string
+        first_name:
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          type: string
+      required:
+      - address
+      - birthday
+      - email_address
+      - first_name
+      - id
+      - last_name
+      type: object
