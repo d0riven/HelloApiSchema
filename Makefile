@@ -14,10 +14,13 @@ rm:
 	$(DOCKER) rm -f $$(cat .swagger-editor.id)
 	rm .swagger-editor.id
 
-.PHONY: generate/openapi api/go-openapi-server
-generate/openapi: api/go-openapi-server
-api/go-openapi-server: api/openapi-schema/openapi.yaml
+.PHONY: generate/openapi/% api/go-openapi-server
+validate/openapi: api/openapi-schema/openapi.yaml
+	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli validate \
+	  -i /app/$<
+generate/openapi: api/go-openapi-server/api/openapi.yaml
+api/go-openapi-server/api/openapi.yaml: api/openapi-schema/openapi.yaml
 	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli generate \
 	  -i /app/$< \
 	  -g go-server \
-	  -o /app/$@
+	  -o /app/$(@:%/api/openapi.yaml=%)
