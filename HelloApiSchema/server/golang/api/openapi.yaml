@@ -203,4 +203,5 @@ components:
       - first_name
       - id
       - last_name
+      title: hoge
       type: object
