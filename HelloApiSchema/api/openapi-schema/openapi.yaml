@@ -162,6 +162,7 @@ components:
     GetUserOutput:
       # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
       # $ref: '#/components/schemas/CreateUserOutput'
+      title: hoge
       type: object
       required:
         - id

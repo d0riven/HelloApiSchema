@@ -15,14 +15,19 @@ rm:
 	rm .swagger-editor.id
 
 .PHONY: validate/openapi generate/openapi/% api/go-openapi-server
-generate/openapi: api/go-openapi-server/api/openapi.yaml
-api/go-openapi-server/api/openapi.yaml: validate/openapi api/openapi-schema/openapi.yaml api/go-server-config.json
+generate: generate/server generate/client
+generate/server: validate/openapi
 	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli generate \
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g go-server \
-		-o /app/$(@:%/api/openapi.yaml=%) \
-		-Dmodels
+		-o /app/server/golang
+generate/client: validate/openapi
+	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli generate \
+		-c /app/api/go-server-config.json \
+		-i /app/api/openapi-schema/openapi.yaml \
+		-g typescript-fetch \
+		-o /app/client/ts
 validate/openapi: api/openapi-schema/openapi.yaml
 	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli validate \
-	  -i /app/$<
+		-i /app/$<
