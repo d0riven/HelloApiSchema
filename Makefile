@@ -27,7 +27,7 @@ generate/client: validate/openapi
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g typescript-fetch \
-		-o /app/client/ts/src
+		-o /app/client/ts/src/api-client
 validate/openapi: api/openapi-schema/openapi.yaml
 	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli validate \
 		-i /app/$<
