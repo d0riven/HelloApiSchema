@@ -8,12 +8,12 @@
 
     /* Strict Type-Checking Options */
     "strict": true,                           /* Enable all strict type-checking options. */
-    // openapi-generatorで生成されるコードが引っかかるので制約はゆるめに
-    // tslintの除外対象になっているので、tslint側で調整する
 //    "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
 //    "strictNullChecks": true,              /* Enable strict null checks. */
 //    "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
 
+    // openapi-generatorで生成されるコードが引っかかるので制約はゆるめに
+    // tslintの除外対象になっているので、tslint側で調整する
     /* Additional Checks */
 //     "noUnusedLocals": true,                /* Report errors on unused locals. */
 //     "noUnusedParameters": true,            /* Report errors on unused parameters. */
@@ -23,9 +23,6 @@
     /* Module Resolution Options */
     "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
-
-    /* Advanced Options */
-    "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file. */
 
     "typeRoots": ["./types", "./node_modules/@types"]
   },
