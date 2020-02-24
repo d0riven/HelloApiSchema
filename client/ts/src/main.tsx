@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
+import {CreateUserInputFromJSON, DefaultApi} from './api-client';
 
-export * from './runtime';
-export * from './apis';
-export * from './models';
+render(
+    <p>hello</p>, document.getElementById('root')
+);

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: './src/main.ts',
+    main: './src/main.tsx',
   },
   output: {
     path: `${__dirname}/dist`,
@@ -12,14 +12,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'HelloApiSchema',
-      filename: 'index.html',
+      template: "src/index.ejs"
     }),
     new CleanWebpackPlugin({}),
   ],
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.(ts|tsx)$/,
         use: [
           { loader: 'babel-loader' },
           { loader: 'ts-loader' },
