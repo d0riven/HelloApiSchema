@@ -1,4 +1,10 @@
 DOCKER := docker
+SED := $(DOCKER) run --rm -v $(PWD):/app -w /app ubuntu:latest sed
+
+URL := http://localhost:8080
+
+.PHONY: FORCE
+FORCE:
 
 .PHONY: clean
 clean:
@@ -31,3 +37,5 @@ generate/client: validate/openapi
 validate/openapi: api/openapi-schema/openapi.yaml
 	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli validate \
 		-i /app/$<
+api/openapi-schema/openapi.yaml: api/openapi-schema/openapi.tmpl.yaml FORCE
+	$(SED) -E 's!__URL__!$(URL)!g' $< > $@
