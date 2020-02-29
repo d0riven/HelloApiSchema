@@ -32,7 +32,7 @@ import {
     UpdateUserOutputToJSON,
 } from '../models';
 
-export interface AddUserRequest {
+export interface CreateUserRequest {
     createUserInput: CreateUserInput;
 }
 
@@ -52,9 +52,9 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Create a new user.
      */
-    async addUserRaw(requestParameters: AddUserRequest): Promise<runtime.ApiResponse<CreateUserOutput>> {
+    async createUserRaw(requestParameters: CreateUserRequest): Promise<runtime.ApiResponse<CreateUserOutput>> {
         if (requestParameters.createUserInput === null || requestParameters.createUserInput === undefined) {
-            throw new runtime.RequiredError('createUserInput','Required parameter requestParameters.createUserInput was null or undefined when calling addUser.');
+            throw new runtime.RequiredError('createUserInput','Required parameter requestParameters.createUserInput was null or undefined when calling createUser.');
         }
 
         const queryParameters: runtime.HTTPQuery = {};
@@ -77,8 +77,8 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * Create a new user.
      */
-    async addUser(requestParameters: AddUserRequest): Promise<CreateUserOutput> {
-        const response = await this.addUserRaw(requestParameters);
+    async createUser(requestParameters: CreateUserRequest): Promise<CreateUserOutput> {
+        const response = await this.createUserRaw(requestParameters);
         return await response.value();
     }
 
