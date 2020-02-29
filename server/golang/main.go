@@ -14,7 +14,7 @@ import (
 	"log"
 	"net/http"
 
-	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/model"
+	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/pkg/openapi"
 )
 
 func main() {

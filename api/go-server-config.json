@@ -1,4 +1,4 @@
 {
-  "sourceFolder": "model",
+  "sourceFolder": "pkg/openapi",
   "featureCORS": true
 }

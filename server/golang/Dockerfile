@@ -1,6 +1,6 @@
 FROM golang:1.10 AS build
 WORKDIR /go/src
-COPY model ./model
+COPY pkg/openapi ./pkg/openapi
 COPY main.go .
 
 ENV CGO_ENABLED=0
