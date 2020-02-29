@@ -14,13 +14,15 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/GIT_USER_ID/GIT_REPO_ID/pkg/api"
 	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/pkg/openapi"
 )
 
 func main() {
 	log.Printf("Server started")
 
-	DefaultApiService := openapi.NewDefaultApiService()
+	//DefaultApiService := openapi.NewDefaultApiService()
+	DefaultApiService := api.NewMockApiService()
 	DefaultApiController := openapi.NewDefaultApiController(DefaultApiService)
 
 	router := openapi.NewRouter(DefaultApiController)
