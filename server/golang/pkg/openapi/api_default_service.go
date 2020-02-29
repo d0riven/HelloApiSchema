@@ -25,11 +25,11 @@ func NewDefaultApiService() DefaultApiServicer {
 	return &DefaultApiService{}
 }
 
-// AddUser - 
-func (s *DefaultApiService) AddUser(createUserInput CreateUserInput) (interface{}, error) {
-	// TODO - update AddUser with the required logic for this service method.
+// CreateUser - 
+func (s *DefaultApiService) CreateUser(createUserInput CreateUserInput) (interface{}, error) {
+	// TODO - update CreateUser with the required logic for this service method.
 	// Add api_default_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-	return nil, errors.New("service method 'AddUser' not implemented")
+	return nil, errors.New("service method 'CreateUser' not implemented")
 }
 
 // GetUser - 

@@ -27,7 +27,7 @@ paths:
   /users:
     post:
       description: Create a new user.
-      operationId: addUser
+      operationId: createUser
       requestBody:
         description: new user info
         required: true

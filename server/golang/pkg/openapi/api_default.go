@@ -32,10 +32,10 @@ func NewDefaultApiController(s DefaultApiServicer) Router {
 func (c *DefaultApiController) Routes() Routes {
 	return Routes{ 
 		{
-			"AddUser",
+			"CreateUser",
 			strings.ToUpper("Post"),
 			"/users",
-			c.AddUser,
+			c.CreateUser,
 		},
 		{
 			"GetUser",
@@ -52,15 +52,15 @@ func (c *DefaultApiController) Routes() Routes {
 	}
 }
 
-// AddUser - 
-func (c *DefaultApiController) AddUser(w http.ResponseWriter, r *http.Request) { 
+// CreateUser - 
+func (c *DefaultApiController) CreateUser(w http.ResponseWriter, r *http.Request) { 
 	createUserInput := &CreateUserInput{}
 	if err := json.NewDecoder(r.Body).Decode(&createUserInput); err != nil {
 		w.WriteHeader(500)
 		return
 	}
 	
-	result, err := c.service.AddUser(*createUserInput)
+	result, err := c.service.CreateUser(*createUserInput)
 	if err != nil {
 		w.WriteHeader(500)
 		return
