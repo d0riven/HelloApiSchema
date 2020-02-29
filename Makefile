@@ -1,5 +1,5 @@
 DOCKER := docker
-SED := $(DOCKER) run --rm -v $(PWD):/app -w /app ubuntu:latest sed
+OPENAPI_GENERATOR_CLI := $(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli
 
 URL := http://localhost:8080
 
@@ -23,17 +23,17 @@ rm:
 .PHONY: validate/openapi generate/openapi/% api/go-openapi-server
 generate: generate/server generate/client
 generate/server: validate/openapi
-	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli generate \
+	$(OPENAPI_GENERATOR_CLI) generate \
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g go-server \
 		-o /app/server/golang
 generate/client: validate/openapi
-	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli generate \
+	$(OPENAPI_GENERATOR_CLI) generate \
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g typescript-fetch \
 		-o /app/client/ts/src/api-client
 validate/openapi: api/openapi-schema/openapi.yaml
-	$(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli validate \
+	$(OPENAPI_GENERATOR_CLI) validate \
 		-i /app/$<
