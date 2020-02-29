@@ -1,3 +1,4 @@
 {
-  "sourceFolder": "model"
+  "sourceFolder": "model",
+  "featureCORS": true
 }
