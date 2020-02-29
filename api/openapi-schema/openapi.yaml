@@ -10,8 +10,15 @@ info:
   license:
     name: MIT
 servers:
-  - url: '__URL__'
+  - url: http://example.com
     description: example
+  - url: http://{host}:{port}
+    description: development
+    variables:
+      host:
+        default: localhost
+      port:
+        default: 8080
 security:
   - BasicAuth: []
 paths:
