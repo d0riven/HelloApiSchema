@@ -1,26 +1,38 @@
 DOCKER := docker
+SWAGGER_EDITOR := $(DOCKER) run --rm -d -p 8180:8080 \
+	--name swagger-editor swaggerapi/swagger-editor
+SWAGGER_UI := $(DOCKER) run --rm -d -p 8280:8080 \
+	-v $(PWD)/api/openapi-schema/openapi.yaml:/app/openapi.yaml \
+	-e SWAGGER_JSON=/app/openapi.yaml \
+	--name swagger-ui swaggerapi/swagger-ui
 OPENAPI_GENERATOR_CLI := $(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-generator-cli
-
-URL := http://localhost:8080
 
 .PHONY: FORCE
 FORCE:
 
 .PHONY: clean
 clean:
-	-rm .swagger-editor.id
+	$(MAKE) rm
 
-.PHONY: run
-run: .swagger-editor.id
+.PHONY: run run/swagger-editor run/swagger-ui
+run: run/swagger-editor run/swagger-ui
+run/swagger-editor: .swagger-editor.id
 .swagger-editor.id:
-	$(DOCKER) run --rm -d -p 8080:8080 --name swagger-editor swaggerapi/swagger-editor | tee -i $@
+	$(SWAGGER_EDITOR) | tee -i $@
+run/swagger-ui: .swagger-ui.id
+.swagger-ui.id:
+	$(SWAGGER_UI) | tee -i $@
 
-.PHONY: rm
-rm:
-	$(DOCKER) rm -f $$(cat .swagger-editor.id)
-	rm .swagger-editor.id
+.PHONY: rm rm/swagger-editor rm/swagger-ui
+rm: rm/swagger-editor rm/swagger-ui
+rm/swagger-editor:
+	-$(DOCKER) rm -f $$(cat .swagger-editor.id)
+	-rm .swagger-editor.id
+rm/swagger-ui:
+	-$(DOCKER) rm -f $$(cat .swagger-ui.id)
+	-rm .swagger-ui.id
 
-.PHONY: validate/openapi generate/openapi/% api/go-openapi-server
+.PHONY: generate generate/server generate/client
 generate: generate/server generate/client
 generate/server: validate/openapi
 	$(OPENAPI_GENERATOR_CLI) generate \
@@ -34,6 +46,8 @@ generate/client: validate/openapi
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g typescript-fetch \
 		-o /app/client/ts/src/api-client
+
+.PHONY: validate/openapi
 validate/openapi: api/openapi-schema/openapi.yaml
 	$(OPENAPI_GENERATOR_CLI) validate \
 		-i /app/$<
