@@ -23,3 +23,4 @@
 #!docs/README.md
 
 api/openapi.yaml
+main.go

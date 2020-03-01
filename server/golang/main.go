@@ -16,16 +16,21 @@ import (
 
 	"github.com/GIT_USER_ID/GIT_REPO_ID/pkg/api"
 	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/pkg/openapi"
+	"github.com/gorilla/handlers"
 )
 
 func main() {
 	log.Printf("Server started")
 
-	//DefaultApiService := openapi.NewDefaultApiService()
-	DefaultApiService := api.NewMockApiService()
-	DefaultApiController := openapi.NewDefaultApiController(DefaultApiService)
+	//mockApiService := openapi.NewDefaultApiService()
+	mockApiService := api.NewMockApiService()
+	//mockApiController := openapi.NewDefaultApiController(mockApiService)
+	mockApiController := api.NewMockApiController(mockApiService)
 
-	router := openapi.NewRouter(DefaultApiController)
+	router := openapi.NewRouter(mockApiController)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(
+		handlers.AllowedMethods([]string{"GET", "PUT", "POST", "DELETE"}),
+		handlers.AllowedHeaders([]string{"Content-Type"}),
+	)(router)))
 }
