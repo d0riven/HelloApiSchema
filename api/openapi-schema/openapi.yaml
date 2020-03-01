@@ -23,9 +23,14 @@ servers:
     description: example
 security:
   - BasicAuth: []
+tags:
+  - name: user
+    description: user api
 paths:
   /users:
     post:
+      tags:
+        - user
       description: Create a new user.
       operationId: createUser
       requestBody:
@@ -43,6 +48,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateUserOutput'
     put:
+      tags:
+        - user
       description: Update a user.
       operationId: updateUser
       requestBody:
@@ -60,6 +67,8 @@ paths:
                 $ref: '#/components/schemas/UpdateUserOutput'
   /users/{id}:
     get:
+      tags:
+        - user
       description: Get a user by id.
       operationId: getUser
       responses:
@@ -184,7 +193,6 @@ components:
     GetUserOutput:
       # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
       # $ref: '#/components/schemas/CreateUserOutput'
-      title: hoge
       type: object
       required:
         - id
