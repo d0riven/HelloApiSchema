@@ -11,8 +11,7 @@ OPENAPI_GENERATOR_CLI := $(DOCKER) run --rm -v $(PWD):/app openapitools/openapi-
 FORCE:
 
 .PHONY: clean
-clean:
-	$(MAKE) rm
+clean: rm
 
 .PHONY: run run/swagger-editor run/swagger-ui
 run: run/swagger-editor run/swagger-ui
