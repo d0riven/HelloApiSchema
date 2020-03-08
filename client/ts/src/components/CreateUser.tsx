@@ -1,5 +1,5 @@
 import * as React from "react";
-import {CreateUserRequest, DefaultApi, GetUserOutput, UpdateUserRequest} from "../api-client";
+import {CreateUserOutput, CreateUserRequest, DefaultApi} from "../api-client";
 
 export let CreateUser = () => (
     <button onClick={() => {
@@ -9,11 +9,11 @@ export let CreateUser = () => (
                 address: '東京都新宿区西新宿２丁目８−１',
                 birthday: new Date(),
                 emailAddress: 'taro@example.com',
-                firstName: '田中',
-                lastName: '太郎',
+                lastName: '田中',
+                firstName: '太郎',
             },
         };
-        c.createUser(input).then((v: GetUserOutput) => {
+        c.createUser(input).then((v: CreateUserOutput) => {
             console.log(v);
         });
     }}>CreateUser</button>
