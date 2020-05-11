@@ -1,3 +1,4 @@
+.PHONY: build server
 build:
 	npx webpack --config webpack.development.js
 server:
