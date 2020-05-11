@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "pkg/pb";
+
+import "google/api/annotations.proto";
+
+message CreateUserInput {
+    string email_address = 1;
+    string last_name = 2;
+    string first_name = 3;
+    string birthday = 4;
+    string address = 5;
+}
+
+message CreateUserOutput {
+    int64 id = 1;
+    string email_address = 2;
+    string last_name = 3;
+    string first_name = 4;
+    string birthday = 5;
+    string address = 6;
+}
+
+message UpdateUserInput {
+    int64 id = 1;
+    string email_address = 2;
+    string last_name = 3;
+    string first_name = 4;
+    string birthday = 5;
+    string address = 6;
+}
+
+message UpdateUserOutput {
+    int64 id = 1;
+    string email_address = 2;
+    string last_name = 3;
+    string first_name = 4;
+    string birthday = 5;
+    string address = 6;
+}
+
+message GetUserInput {
+    int64 id = 1;
+}
+
+message GetUserOutput {
+    int64 id = 1;
+    string email_address = 2;
+    string last_name = 3;
+    string first_name = 4;
+    string birthday = 5;
+    string address = 6;
+}
+
+service UserService {
+    rpc Create (CreateUserInput) returns (CreateUserOutput) {
+        option (google.api.http) = {
+            post: "/user"
+            body: "*"
+        };
+    }
+    rpc Update (UpdateUserInput) returns (UpdateUserOutput) {
+        option (google.api.http) = {
+            patch: "/user"
+            body: "*"
+        };
+    }
+    rpc Get (GetUserInput) returns (GetUserOutput) {
+        option (google.api.http) = {
+            get: "/user/{id}"
+        };
+    }
+}

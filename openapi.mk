@@ -23,6 +23,7 @@ run/swagger-ui: .swagger-ui.id
 	$(SWAGGER_UI) | tee -i $@
 
 .PHONY: rm rm/swagger-editor rm/swagger-ui
+# TODO: --rm オプションをつけているのでコンテナIDを使わずstopでコンテナ名を指定すればコンテナID不要になる
 rm: rm/swagger-editor rm/swagger-ui
 rm/swagger-editor:
 	-$(DOCKER) rm -f $$(cat .swagger-editor.id)
