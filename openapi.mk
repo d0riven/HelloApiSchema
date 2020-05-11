@@ -39,13 +39,13 @@ generate/server: validate/openapi
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g go-server \
-		-o /app/server/golang
+		-o /app/server/golang/openapi
 generate/client: validate/openapi
 	$(OPENAPI_GENERATOR_CLI) generate \
 		-c /app/api/go-server-config.json \
 		-i /app/api/openapi-schema/openapi.yaml \
 		-g typescript-fetch \
-		-o /app/client/ts/src/api-client
+		-o /app/client/ts/openapi/src/api-client
 
 .PHONY: validate/openapi
 validate/openapi: api/openapi-schema/openapi.yaml
