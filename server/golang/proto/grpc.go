@@ -19,7 +19,7 @@ import (
 func main() {
 	listen, err := net.Listen("tcp", ":5555")
 	if err != nil {
-	    panic(err)
+		panic(err)
 	}
 
 	logrus.SetLevel(logrus.DebugLevel)
@@ -42,6 +42,6 @@ func main() {
 	pb.RegisterUserServiceServer(server, service.NewUserService())
 	logger.Info("run server")
 	if err := server.Serve(listen); err != nil {
-	    panic(err)
+		panic(err)
 	}
 }
